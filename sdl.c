@@ -15,7 +15,7 @@ int main(int argc, char  **argv)
         exit(EXIT_FAILURE);
     }
 
-    if(SDL_CreateWindowAndRenderer(800, 600, 0,&window,&renderer)!=0)
+    if(SDL_CreateWindowAndRenderer(1024, 768, 0,&window,&renderer)!=0)
     {
         SDL_ExitWithError("Rendu Impossible");
     }
@@ -25,17 +25,6 @@ int main(int argc, char  **argv)
         SDL_ExitWithError("impossible de charger couleur");
 
     }
-
-    if(SDL_RenderDrawPoint(renderer,100,450)!=0)
-    {
-        SDL_ExitWithError("Point");
-    }
-
-    if(SDL_RenderDrawLine(renderer,50,50,500,500)!=0)
-    {
-        SDL_ExitWithError("Ligne");
-    }
-
     SDL_bool program_launched = SDL_TRUE;
     SDL_Rect Dessin;
     Dessin.h=200;
@@ -44,13 +33,14 @@ int main(int argc, char  **argv)
     Dessin.y=100;
 
 
+
     while (program_launched)
     {
         SDL_Event event;
         //SDL_BlitSurface(&Dessin);
         SDL_RenderPresent(renderer);
-        SDL_RenderDrawRect(renderer,&Dessin);
-        SDL_RenderFillRect(renderer,&Dessin);
+        //SDL_RenderDrawRect(renderer,&Dessin);
+       // SDL_RenderFillRect(renderer,&Dessin);
 
         while(SDL_PollEvent(&event))
         {
@@ -59,7 +49,21 @@ int main(int argc, char  **argv)
             case SDL_QUIT:
                 program_launched = SDL_FALSE;
                 break;
-            
+            case SDL_KEYUP:
+            for(int i = 0; i<3000;++i)
+            {
+                SDL_Rect Condi;
+                Condi.h=(rand()%(100-30+1))+30;
+                Condi.w=(rand()%(200-20+1))+20;
+                Condi.x=(rand()%(1024-0+1))+0;
+                Condi.y=(rand()%(768-0+1))+0;
+                SDL_SetRenderDrawColor(renderer,rand()%256,rand()%256,rand()%256,SDL_ALPHA_OPAQUE);
+                SDL_RenderDrawRect(renderer,&Condi);
+                SDL_RenderFillRect(renderer,&Condi);
+
+
+            }
+                
             default:
                 break;
             }
