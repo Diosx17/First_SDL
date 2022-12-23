@@ -1,6 +1,6 @@
 #include <SDL.h>
 #include <stdio.h>
-
+//gcc sdl.c -o main -I include -L lib -lmingw32 -lSDL2main -lSDL2
 void SDL_ExitWithError(const char *message);
 
 
@@ -49,22 +49,34 @@ int main(int argc, char  **argv)
             case SDL_QUIT:
                 program_launched = SDL_FALSE;
                 break;
-            case SDL_KEYUP:
-            for(int i = 0; i<3000;++i)
-            {
-                SDL_Rect Condi;
-                Condi.h=(rand()%(100-30+1))+30;
-                Condi.w=(rand()%(200-20+1))+20;
-                Condi.x=(rand()%(1024-0+1))+0;
-                Condi.y=(rand()%(768-0+1))+0;
-                SDL_SetRenderDrawColor(renderer,rand()%256,rand()%256,rand()%256,SDL_ALPHA_OPAQUE);
-                SDL_RenderDrawRect(renderer,&Condi);
-                SDL_RenderFillRect(renderer,&Condi);
+
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_UP:
+                        for(int i = 0; i<10;++i)
+                        {
+                            SDL_Rect Condi;
+                            Condi.h=(rand()%(100-30+1))+30;
+                            Condi.w=(rand()%(200-20+1))+20;
+                            Condi.x=(rand()%(1024-0+1))+0;
+                            Condi.y=(rand()%(768-0+1))+0;
+                            SDL_SetRenderDrawColor(renderer,rand()%256,rand()%256,rand()%256,SDL_ALPHA_OPAQUE);
+                            SDL_RenderDrawRect(renderer,&Condi);
+                            SDL_RenderFillRect(renderer,&Condi);
+                            
 
 
-            }
+                        }
+                        break;
+                    
+                    default:
+                        break;
+                }
+              
                 
             default:
+
                 break;
             }
 
