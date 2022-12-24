@@ -1,11 +1,15 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <time.h>
+#include <unistd.h>
+
 //gcc sdl.c -o main -I include -L lib -lmingw32 -lSDL2main -lSDL2
 void SDL_ExitWithError(const char *message);
 
 
 int main(int argc, char  **argv)
 {
+    srand(time(NULL));
     SDL_Window *window = NULL;
     SDL_Renderer *renderer = NULL;
 
@@ -64,7 +68,7 @@ int main(int argc, char  **argv)
                             SDL_SetRenderDrawColor(renderer,rand()%256,rand()%256,rand()%256,SDL_ALPHA_OPAQUE);
                             SDL_RenderDrawRect(renderer,&Condi);
                             SDL_RenderFillRect(renderer,&Condi);
-                            
+                        
 
 
                         }
@@ -73,8 +77,6 @@ int main(int argc, char  **argv)
                     default:
                         break;
                 }
-              
-                
             default:
 
                 break;
